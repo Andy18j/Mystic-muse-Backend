@@ -20,7 +20,7 @@ userRouter.post('/signup', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new userModel({ username, email, password: hashedPassword,confirm_password:hashedPassword });
         await newUser.save()
-        res.status(201).json({ token, msg: "User signed up successfully" });
+        res.status(201).json({ msg: "User signed up successfully" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ msg: "Internal server error" });
@@ -43,7 +43,7 @@ userRouter.post('/login', async (req, res) => {
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        res.status(200).json({ token, msg: "Login successful" });
+        res.status(200).json({msg: "Login successful" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ msg: "Internal server error" });
