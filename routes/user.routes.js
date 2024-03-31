@@ -19,9 +19,7 @@ userRouter.post('/signup', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new userModel({ username, email, password: hashedPassword,confirm_password:hashedPassword });
-        await newUser.save();
-        // const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
+        await newUser.save()
         res.status(201).json({ token, msg: "User signed up successfully" });
     } catch (err) {
         console.error(err);
