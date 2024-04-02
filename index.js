@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require("cors")
 const { connections } = require('./config/db')
 const { userRouter } = require('./routes/user.routes')
+const { coatRouter } = require('./routes/coat.model')
 require('dotenv').config()
 
 
@@ -9,6 +10,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use('/user',userRouter)
+app.use('/coat',coatRouter)
 
 app.get('/',(req,res)=>{
     res.send('welcome To the Mystic muse Collections')
